@@ -1,5 +1,6 @@
 ## Getting Started
 
+//core paytm app that end users use
 First, run the development server:
 
 ```bash

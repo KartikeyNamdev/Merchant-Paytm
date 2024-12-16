@@ -1,5 +1,6 @@
 ## Getting Started
 
+///merchant app for swiggy,amazon to accept payment by paytm
 First, run the development server:
 
 ```bash
