@@ -6,9 +6,14 @@ import { authOptions } from "../../lib/auth";
 import prisma from "@repo/db/client";
 async function getBalance() {
   const session = await getServerSession(authOptions);
+  // const balance = await prisma.balance.findFirst({
+  //   where: {
+  //     userId: Number(session?.user?.id),
+  //   },
+  // });
   const balance = await prisma.balance.findFirst({
     where: {
-      userId: Number(session?.user?.id),
+      userId: session?.user?.id,
     },
   });
 
@@ -22,7 +27,7 @@ export async function getOnRampTrans() {
   const session = await getServerSession(authOptions);
   const txn = await prisma.onRampTransaction.findMany({
     where: {
-      userId: Number(session?.user?.id),
+      userId: session?.user?.id,
     },
   });
 

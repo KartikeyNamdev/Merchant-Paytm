@@ -4,9 +4,9 @@ import { Appbar } from "@repo/ui/appbar";
 import { useRouter } from "next/navigation";
 
 export function AppbarClient() {
-  const { data: session, status } = useSession();
+  const session = useSession();
   const router = useRouter();
-  if (status === "loading") {
+  if (session.status === "loading") {
     return null;
   }
   return (
@@ -17,7 +17,7 @@ export function AppbarClient() {
           await signOut();
           router.push("/api/auth/signin");
         }}
-        user={session?.user}
+        user={session.data?.user}
       />
     </div>
   );

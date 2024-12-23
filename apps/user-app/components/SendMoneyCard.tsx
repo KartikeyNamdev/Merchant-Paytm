@@ -6,7 +6,7 @@ import { useState } from "react";
 import { p2pTransfer } from "../app/lib/actions/p2pTransfer";
 
 export function SendMoneyCard() {
-  const [number, setNumber] = useState("");
+  const [to, setTo] = useState("");
   const [amount, setAmount] = useState("");
 
   return (
@@ -18,7 +18,7 @@ export function SendMoneyCard() {
               placeholder="User"
               label="Phone number"
               onchange={(e) => {
-                setNumber(e);
+                setTo(e);
               }}
             ></TextInput>
             <TextInput
@@ -31,7 +31,7 @@ export function SendMoneyCard() {
             <div className="flex justify-center p-5">
               <Button
                 onClick={async () => {
-                  await p2pTransfer(Number(amount) * 100), number;
+                  await p2pTransfer(amount, to);
                 }}
               >
                 Send Money

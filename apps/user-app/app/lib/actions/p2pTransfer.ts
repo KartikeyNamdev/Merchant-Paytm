@@ -1,28 +1,35 @@
+"use server";
 import prisma from "@repo/db/client";
 import { authOptions } from "../auth";
 import { getServerSession } from "next-auth";
 
-export async function p2pTransfer(amount: number to: string) {
+export async function p2pTransfer(amount: string, to: string) {
   const session = await getServerSession(authOptions);
-  console.log("Working");
-  const from = await session?.user?.id;
+  const from = Number(session.user.id);
+
   if (!from) {
     return {
       msg: "User not logged in !",
     };
   }
-  const user = await prisma.user.findFirst({ where: { number: to } });
-  if (!user) {
-    return {
-      msg: "User not found !",
-    };
-  }
+
+  const fromUserBalance = await prisma.balance.findFirst({
+    where: { userId: from },
+  });
+
+  const toUser = await prisma.user.findFirst({
+    where: {
+      number: to,
+    },
+  });
 
   await prisma.$transaction(async (txn: any) => {
-    if (from.balance.amount > Number(amount)) {
+    await txn.$queryRaw`SELECT * FROM "Balance" WHERE "userId" = ${Number(from)} FOR UPDATE`;
+    //@ts-ignore
+    if (fromUserBalance.amount > Number(amount)) {
       await txn.balance.update({
         where: {
-          userId: Number(to),
+          userId: Number(toUser?.id),
         },
         data: {
           amount: { increment: Number(amount) },
@@ -32,7 +39,7 @@ export async function p2pTransfer(amount: number to: string) {
 
       await txn.balance.update({
         where: {
-          userId: Number(from),
+          userId: from,
         },
         data: {
           amount: { decrement: Number(amount) },
