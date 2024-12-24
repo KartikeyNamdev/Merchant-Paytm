@@ -1,5 +1,5 @@
 import { OnrampCard } from "../../../components/onRampCard";
-import { P2pTransactionCard } from "../../../components/p2pTransactions";
+import { P2pTransactionCard } from "../../../components/P2pTransactions";
 import { getOnRampTrans, getP2p } from "../transfer/page";
 
 export default async function () {
