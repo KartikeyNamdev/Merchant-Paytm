@@ -13,7 +13,7 @@ async function getBalance() {
   // });
   const balance = await prisma.balance.findFirst({
     where: {
-      userId: session?.user?.id,
+      userId: Number(session?.user?.id),
     },
   });
 
@@ -22,12 +22,20 @@ async function getBalance() {
     locked: balance?.locked || 0,
   };
 }
-
+export async function getP2p() {
+  const session = await getServerSession(authOptions);
+  const p2p = await prisma.p2pTransfer.findMany({
+    where: {
+      fromUserId: Number(session.user.id),
+    },
+  });
+  return p2p;
+}
 export async function getOnRampTrans() {
   const session = await getServerSession(authOptions);
   const txn = await prisma.onRampTransaction.findMany({
     where: {
-      userId: session?.user?.id,
+      userId: Number(session?.user?.id),
     },
   });
 

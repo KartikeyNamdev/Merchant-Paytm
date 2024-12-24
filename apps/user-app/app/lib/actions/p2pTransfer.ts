@@ -2,6 +2,7 @@
 import prisma from "@repo/db/client";
 import { authOptions } from "../auth";
 import { getServerSession } from "next-auth";
+import { timeStamp } from "console";
 
 export async function p2pTransfer(amount: string, to: string) {
   const session = await getServerSession(authOptions);
@@ -45,6 +46,15 @@ export async function p2pTransfer(amount: string, to: string) {
           amount: { decrement: Number(amount) },
         },
       });
+      await txn.p2pTransfer.create({
+        data: {
+          fromUserId: from,
+          toUserId: toUser?.id,
+          amount: Number(amount),
+          timestamp: new Date(),
+        },
+      });
+
       return {
         message: "Money Sent",
       };
