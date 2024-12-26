@@ -3,7 +3,7 @@ name: Build succeds on PR
 on:
   pull request:
     branches:
-      - master
+      - *
 
 jobs:
   build:
