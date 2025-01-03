@@ -1,7 +1,7 @@
 name: Build succeds on PR
 
 on:
-  pull request:
+  pull_request:
     branches:
       - master
 
