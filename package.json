@@ -3,9 +3,11 @@
   "private": true,
   "scripts": {
     "start": "node dist/index.js",
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
+    "build": "turbo run build",
+    "build:docs": "npx turbo run build --filter docs",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "db:generate": "cd packages/db && npx prisma generate && cd ../..",
     "start-user-app": "cd ./apps/user-app && npm run start"
