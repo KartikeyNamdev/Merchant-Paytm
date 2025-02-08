@@ -3,9 +3,7 @@
   "private": true,
   "scripts": {
     "start": "node dist/index.js",
-    "build": "cross-env NODE_ENV=production && cd packages/db && prisma generate && next build"
-,
-    "build:docs": "npx turbo run build --filter docs",
+    "build": "cross-env NODE_ENV=production && cd packages/db && prisma generate && next build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "clean": "turbo run clean",
