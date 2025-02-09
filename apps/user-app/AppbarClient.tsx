@@ -12,7 +12,10 @@ export function AppbarClient() {
   return (
     <div>
       <Appbar
-        onSignin={signIn}
+        onSignin={async () => {
+          await signIn();
+          router.push("/dashboard");
+        }}
         onSignout={async () => {
           await signOut();
           router.push("/api/auth/signin");

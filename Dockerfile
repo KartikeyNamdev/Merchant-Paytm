@@ -13,7 +13,7 @@ RUN npm install
 RUN npm run db:generate
 
 # Can you filter the build down to just one app?
-RUN npm run build
+RUN npm run build --workspace=user-app
 
 CMD ["npm", "run", "start-user-app"]
 EXPOSE 3000

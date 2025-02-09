@@ -1,22 +1,16 @@
 "use client";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FaWallet, FaExchangeAlt, FaShieldAlt } from "react-icons/fa";
 
 export default function Home() {
+  const session = useSession();
   const router = useRouter();
+  if (session.status === "authenticated") {
+    router.push("/dashboard");
+  }
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
-      {/* Navbar */}
-      {/* <nav className="p-4 bg-white shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">UserApp</h1>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-            Get Started
-          </button>
-        </div>
-      </nav> */}
-
-      {/* Hero Section */}
       <section className="container mx-auto text-center py-20">
         <h1 className="text-5xl font-bold text-gray-800 mb-4">
           Your All-in-One Digital Wallet
