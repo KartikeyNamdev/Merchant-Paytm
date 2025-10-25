@@ -7,7 +7,7 @@ export default function Layout({
   return (
     <div className="flex">
       <div className="w-72 border-r border-slate-300 min-h-screen mr-4 pt-28">
-        <div className="grid gap-4 grid-rows-3 pl-2 ">
+        <div className="grid gap-4 grid-rows-3 pl-2">
           <SidebarItem href={"/dashboard"} icon={<HomeIcon />} title="Home" />
           <SidebarItem
             href={"/transfer"}

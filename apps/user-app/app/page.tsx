@@ -1,6 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import {
   FaWallet,
   FaExchangeAlt,
@@ -31,10 +32,11 @@ export default function Home() {
   const session = useSession();
   const router = useRouter();
 
-  if (session.status === "authenticated") {
-    router.push("/dashboard");
-    return null; // Don't render anything while redirecting
-  }
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      router.push("/dashboard");
+    }
+  }, [session]);
 
   const handleSignIn = () => {
     // Make sure to update your callback URL if it's different
@@ -159,12 +161,12 @@ export default function Home() {
           <FeatureShowcase
             title="Effortless payments & instant requests"
             description="Easily send or request payments from anyone with just a phone number. All funds are settled instantly with support from our secure bank partners."
-            imageUrl="/path-to-your-p2p-screenshot.png" // << ADD YOUR IMAGE PATH
+            imageUrl="/path-to-your-p2p-screenshot.jpeg" // << ADD YOUR IMAGE PATH
           />
           <FeatureShowcase
             title="Data that drives smart decisions"
             description="Analyze your transactions from every angle. Dive into spending habits, filter by date, and understand your financial health with our simple, powerful dashboard."
-            imageUrl="/path-to-your-dashboard-screenshot.png" // << ADD YOUR IMAGE PATH
+            imageUrl="/path-to-your-dashboard-screenshot.jpeg" // << ADD YOUR IMAGE PATH
             reverse={true}
           />
         </div>
