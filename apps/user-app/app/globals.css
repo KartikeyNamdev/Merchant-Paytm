@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: #0d0b10; /* bg-primary */
+  color: #ffffff; /* text-primary */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* A simple utility class for that "glass" effect */
+.card-glass {
+  @apply bg-bg-card/60 backdrop-blur-lg border border-border-primary;
+}
